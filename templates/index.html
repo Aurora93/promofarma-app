@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promofarma App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="main">
+        <section class="product-list">
+            <div class="product-list__container">
+                <ul class="product-list__list">
+                    <li class="product-list__product">
+                        <p class="product-list__name">LaJusticia colágeno con magnesio 450comp</p>
+                        <p class="product-list__price">14,35€</p>
+                        <img class="product-list__add-to-cart" src="../public/icons/add-to-cart.png" alt="">
+                    </li>
+                    <li class="product-list__product">
+                        <p class="product-list__name">Xhekpon® crema facial 40ml</p>
+                        <p class="product-list__price">6,49€</p>
+                        <img class="product-list__add-to-cart" src="../public/icons/add-to-cart.png" alt="">
+                    </li>
+                    <li class="product-list__product">
+                        <p class="product-list__name">Cerave® Crema Hidratante 340ml</p>
+                        <p class="product-list__price">11,70€</p>
+                        <img class="product-list__add-to-cart" src="../public/icons/add-to-cart.png" alt="">
+                    </li>
+                    <li class="product-list__product">
+                        <p class="product-list__name">Hyabak solución 10ml</p>
+                        <p class="product-list__price">9,48€</p>
+                        <img class="product-list__add-to-cart" src="../public/icons/add-to-cart.png" alt="">
+                    </li>
+                    <li class="product-list__product">
+                        <p class="product-list__name">Fotoprotector ISDIN® Fusion Water SPF 50+ 50ml</p>
+                        <p class="product-list__price">19,74€</p>
+                        <img class="product-list__add-to-cart" src="../public/icons/add-to-cart.png" alt="">
+                    </li>
+                    <li class="product-list__product">
+                        <p class="product-list__name">Piz Buin® Allergy SPF50+ loción 200ml</p>
+                        <p class="product-list__price">8,65€</p>
+                        <img class="product-list__add-to-cart" src="../public/icons/add-to-cart.png" alt="">
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+
+        <section class="cart">
+            <div class="cart__container">
+                <p class="cart__header">MI CESTA:</p>
+
+                <div class="cart__bar"></div>
+
+                <div class="cart__product-list--hidden">
+                    <ul class="cart__list">
+                        <li class="carted-product">
+                            <div class="carted-product__container">
+                                <img src="" alt="" class="carted-product__image">
+                                <p class="carted-product__name"></p>
+                                <div class="carted-product__price">
+                                    <span class="carted-product__price-value"></span>
+                                    <button class="carted-product__delete-button">Eliminar</button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="cart__total">
+                    <div class="cart__quantity">
+                        <h2 class="cart__text">TOTAL</h2>
+                        <p class="cart__amount">(3 productos)</p>
+                    </div>
+                    <span class="cart__total-price">27,06 €</span>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
