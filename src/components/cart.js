@@ -22,50 +22,9 @@ function Cart(props) {
     cartList.classList.add("cart__list");
 
     props.results.forEach(function(result){
-        var cartedProduct = document.createElement("li");
-        cartedProduct.classList.add("cart__product");
+        var cartedProduct = new CartItem({ result: result });
 
-        var cartLeft = document.createElement("div");
-        cartLeft.classList.add("cart__left");
-
-        var cartImage = document.createElement("img");
-        cartImage.classList.add("cart__image");
-        cartImage.src = "../../public/product-images/" + result.image;
-        cartLeft.append(cartImage);
-
-        var cartName = document.createElement("p");
-        cartName.classList.add("cart__name");
-        cartName.innerText = result.name;
-        cartLeft.append(cartName);
-
-        cartedProduct.append(cartLeft);
-
-        var cartPrice = document.createElement("div");
-        cartPrice.classList.add("cart__price");
-
-        var cartPriceValue = document.createElement("span");
-        cartPriceValue.classList.add("cart__price-value");
-        cartPriceValue.innerText = result.price + " €";
-        cartPrice.append(cartPriceValue);
-
-        var cartDeleteButton = document.createElement("button");
-        cartDeleteButton.classList.add("cart__delete-button");
-        cartDeleteButton.innerText = "Eliminar";
-        cartDeleteButton.addEventListener("click", function(event) {
-            event.preventDefault();
-
-            cartDeleteButton.innerText === "Eliminar" ? 
-            cartDeleteButton.innerText = "Eliminado!"
-            :
-            cartDeleteButton.innerText = "Eliminar";
-
-            //TODO do the actual delete
-        });
-        cartPrice.append(cartDeleteButton);
-
-        cartedProduct.append(cartPrice);
-
-        cartList.append(cartedProduct);
+        cartList.append(cartedProduct.container);
     });
 
     var cartTotal = document.createElement("div");
