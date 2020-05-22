@@ -9,6 +9,13 @@ body
     height: 100%
 
 .main
+    height: 100vh
     display: flex
     flex-direction: column
     justify-content: space-between
+
+@media only screen and (min-width: 768px)
+    .main
+        display: grid
+        grid-template-columns: 60% 1fr
+        padding: 5%
