@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Mocha Tests</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="vendor/mocha/mocha.css" />
+</head>
+
+<body>
+    <div id="mocha"></div>
+
+    <script src="vendor/mocha/mocha.js"></script>
+    <script src="vendor/chai/chai.js"></script>
+
+    <script class="mocha-init">
+        mocha.setup('bdd');
+        mocha.checkLeaks();
+        mocha.timeout(50000);
+
+        var expect = chai.expect;
+    </script>
+
+    <script src="../public/data/data.json"></script>
+
+    <!-- <script src="./utils/extends-from.js"></script>
+    <script src="./utils/extends-from.spec.js"></script> -->
+    <script src="./utils/function.js"></script>
+    <script src="./utils/function.spec.js"></script>
+    <script src="./utils/object.js"></script>
+    <script src="./utils/object.spec.js"></script>
+    <script src="./utils/load-json.js"></script>
+    <script src="./utils/load-json.spec.js"></script>
+    
+    <script class="mocha-exec">
+        mocha.run()
+    </script>
+</body>
+
+</html>
