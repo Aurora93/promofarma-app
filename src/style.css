@@ -9,12 +9,26 @@
   padding: 5px 17px 5px 13px;
 }
 
+.product-list__price--disabled, .product-list__price {
+  text-align: right;
+  align-self: center;
+  font-weight: bolder;
+  font-size: 1.1em;
+}
+
 .product-list__add-to-cart--disabled, .product-list__add-to-cart {
   align-self: center;
   background-color: #97be0d;
   width: 46px;
   border-radius: 5px;
   padding: 5px 17px 5px 13px;
+}
+
+.product-list__price--disabled, .product-list__price {
+  text-align: right;
+  align-self: center;
+  font-weight: bolder;
+  font-size: 1.1em;
 }
 
 .cart {
@@ -122,6 +136,13 @@
   padding: 5px 17px 5px 13px;
 }
 
+.product-list__price--disabled, .product-list__price {
+  text-align: right;
+  align-self: center;
+  font-weight: bolder;
+  font-size: 1.1em;
+}
+
 .product-list {
   padding: 4.15% 2.65%;
 }
@@ -147,14 +168,11 @@
   margin: 0;
   align-self: center;
 }
-.product-list__price {
-  text-align: right;
-  align-self: center;
-  font-weight: bolder;
-  font-size: 1.1em;
+.product-list__price--disabled {
+  color: #cccccc;
 }
 .product-list__add-to-cart--disabled {
-  background-color: grey;
+  background-color: #cccccc;
 }
 
 body {

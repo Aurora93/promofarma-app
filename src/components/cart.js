@@ -8,7 +8,7 @@ function Cart(props) {
 
     var cartHeader = document.createElement("p");
     cartHeader.classList.add("cart__header");
-    cartHeader.innerText = "MI CESTA:"
+    cartHeader.innerText = "MI CESTA:";
     cartContainer.append(cartHeader);
 
     var cartBar = document.createElement("div");

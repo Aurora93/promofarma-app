@@ -22,8 +22,10 @@ function Product(props) {
         event.preventDefault();
         // if (addToCartButton.className === "product-list__add-to-cart") addToCartButton.className += "--disabled";
         // else addToCartButton.className = "product-list__add-to-cart";
-        if (addToCartButton.className === "product-list__add-to-cart") addToCartButton.className += "--disabled";
-        else return;
+        if (addToCartButton.className === "product-list__add-to-cart") {
+            addToCartButton.className += "--disabled";
+            productPrice.className += "--disabled";
+        } else return;
         //TODO: mover datos de product-list a cart
     });
     product.append(addToCartButton);

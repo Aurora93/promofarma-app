@@ -24,16 +24,16 @@
         align-self: center
 
     &__price
-        text-align: right
-        align-self: center
-        font-weight: bolder
-        font-size: 1.1em
+        @extend %product-price
+        &--disabled
+            @extend %product-price
+            color: #cccccc
 
     &__add-to-cart
         @extend %button-success
         &--disabled
             @extend %button-success
-            background-color: grey
+            background-color: #cccccc
 
 // @media screen only and (min-width: 768px)
 //     .product-list
