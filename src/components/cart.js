@@ -47,9 +47,7 @@ function Cart(props) {
 
     var cartTotalPrice = document.createElement("span");
     cartTotalPrice.classList.add("cart__total-price");
-    cartTotalPrice.innerText = props.results.reduce(function(accum, item){
-        return accum += item.price;
-    }, 0) + " €";
+    cartTotalPrice.innerText = props.results.totalPrice();
     cartTotal.append(cartTotalPrice);
 
     cartProductList.append(cartList);

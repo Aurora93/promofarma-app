@@ -12,7 +12,10 @@ function ProductList(props){
     productListUL.classList.add("product-list__list");
     
     props.results.forEach(function(result) {
-        var product = new Product({ result: result });
+        var product = new Product({ 
+            result: result,
+            onAddToCart: props.onAddToCart 
+        });
 
         productListUL.append(product.container);
     });

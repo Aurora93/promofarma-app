@@ -8,12 +8,40 @@ function App() {
 
     loadJSON(function(response) {  
         var data = JSON.parse(response);
-        
-        var productList = new ProductList({ results: data });
-        app.append(productList.container);
+        data.map(function(product){
+            product.addedToCart = false;
+        });
+        var cartList = data.filter(function(product) { return product.addedToCart });
 
-        var cart = new Cart({ results: data });
-        app.append(cart.container);
+        function newProductList() {
+            var productList = new ProductList({ 
+                results: data,
+                onAddToCart: function(productId) {
+                    try {
+                        addToCart(data, productId);
+                        cartList = data.filter(function(product) { return product.addedToCart });
+                        
+                        app.querySelector("section.cart").replaceWith(newCart().container);
+                        
+                    } catch(error) {
+
+                    }
+                }
+            });
+            
+            return productList;
+        }
+
+        
+        app.append(newProductList().container);
+        
+        function newCart() {
+            var cart = new Cart({ 
+                results: cartList 
+            });
+            return cart;
+        }
+        app.append(newCart().container);
     });
 };
 

@@ -20,13 +20,13 @@ function Product(props) {
     addToCartButton.src = "../../public/icons/add-to-cart.png";
     addToCartButton.addEventListener("click", function(event) {
         event.preventDefault();
-        // if (addToCartButton.className === "product-list__add-to-cart") addToCartButton.className += "--disabled";
-        // else addToCartButton.className = "product-list__add-to-cart";
+
         if (addToCartButton.className === "product-list__add-to-cart") {
             addToCartButton.className += "--disabled";
             productPrice.className += "--disabled";
         } else return;
-        //TODO: mover datos de product-list a cart
+        
+        props.onAddToCart(props.result.id);
     });
     product.append(addToCartButton);
 

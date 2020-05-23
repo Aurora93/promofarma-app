@@ -19,6 +19,8 @@ describe("loadJSON", function() {
                 expect(product.name).to.be.a("string");
                 expect(product.price).to.exist;
                 expect(product.price).to.be.a("number");
+                expect(product.id).to.exist;
+                expect(product.id).to.be.a("number");
                 expect(product.image).to.exist;
                 expect(product.image).to.be.a("string");
             });
