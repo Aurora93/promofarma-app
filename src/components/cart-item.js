@@ -3,6 +3,7 @@
 function CartItem(props) {
     var cartedProduct = document.createElement("li");
     cartedProduct.classList.add("cart__product");
+    cartedProduct.setAttribute("id", props.result.id);
     Component.call(this, cartedProduct);
 
     var cartLeft = document.createElement("div");
