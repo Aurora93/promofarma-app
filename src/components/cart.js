@@ -57,3 +57,18 @@ function Cart(props) {
 };
 
 Cart.extendsFrom(Component);
+
+Cart.prototype.addItem = function(product) {
+    var newProductToCart = new CartItem({ result: product });
+    document.querySelector("ul.cart__list").append(newProductToCart.container);
+}
+
+Cart.prototype.removeItem = function(product) {
+    var productToRemoveFromCart = document.getElementById(product.id);
+    document.querySelector("ul.cart__list").removeChild(productToRemoveFromCart);
+}
+
+Cart.prototype.totalPrice = function(cartArray) {
+    document.querySelector(".cart__total-price").innerText = cartArray.totalPrice();
+    document.querySelector(".cart__amount").innerText = "(" + cartArray.length + (cartArray.length === 1 ? " producto)" : " productos)");
+}

@@ -3,6 +3,7 @@
 function Product(props) {
     var product = document.createElement("li");
     product.classList.add("product-list__product");
+    product.setAttribute("id", props.result.id);
     Component.call(this, product);
     
     var productName = document.createElement("p");
@@ -19,12 +20,12 @@ function Product(props) {
     addToCartButton.classList.add("product-list__add-to-cart");
     addToCartButton.src = "../../public/icons/add-to-cart.png";
     addToCartButton.addEventListener("click", function(event) {
-        event.preventDefault();
+        // event.preventDefault();
 
-        if (addToCartButton.className === "product-list__add-to-cart") {
-            addToCartButton.className += "--disabled";
-            productPrice.className += "--disabled";
-        } else return;
+        // if (addToCartButton.className === "product-list__add-to-cart") {
+        //     addToCartButton.className += "--disabled";
+        //     productPrice.className += "--disabled";
+        // } else return;
         
         props.onAddToCart(props.result.id);
     });
