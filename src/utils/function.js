@@ -1,3 +1,5 @@
+"use strict";
+
 (function () {
     Function.isFunction = function (func) {
         return typeof func === "function";

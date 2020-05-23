@@ -1,11 +1,7 @@
 "use strict";
 
-require("./function");
-var chai = require("chai");
-var expect = chai.expect;
-
-describe('Function', () => {
-    it("should not throw an error if the argument passed is a function", () => {
+describe('Function.validate', function() {
+    it("should succeed if the argument passed is a function", function() {
         var callback = function () { };
         var functionTested = Function.validate(callback);
 
@@ -13,7 +9,7 @@ describe('Function', () => {
         expect(functionTested).to.be.undefined;
     });
 
-    it("should throw a TypeError if the argument passed is a string", () => {
+    it("should throw a TypeError if the argument passed is a string", function() {
         var notACallback = "some string";
 
         try {
@@ -25,7 +21,7 @@ describe('Function', () => {
         }
     });
 
-    it("should throw a TypeError if the argument passed is a number", () => {
+    it("should throw a TypeError if the argument passed is a number", function() {
         var notACallback = 10;
 
         try {
@@ -36,7 +32,8 @@ describe('Function', () => {
             expect(error.message).to.equal(notACallback + " is not a function");
         }
     });
-   it("should throw a TypeError if the argument passed is an array", () => {
+
+    it("should throw a TypeError if the argument passed is an array", function() {
         var notACallback = [];
 
         try {
@@ -48,7 +45,7 @@ describe('Function', () => {
         }
     });
 
-    it("should throw a TypeError if the argument passed is an boolean", () => {
+    it("should throw a TypeError if the argument passed is an boolean", function() {
         var notACallback = false;
 
         try {
@@ -60,7 +57,7 @@ describe('Function', () => {
         }
     });
 
-    it("should throw a TypeError if the argument passed is undefined", () => {
+    it("should throw a TypeError if the argument passed is undefined", function() {
         var notACallback;
 
         try {
@@ -71,7 +68,8 @@ describe('Function', () => {
             expect(error.message).to.equal(notACallback + " is not a function");
         }
     });
-    it("should throw a TypeError if the argument passed is null", () => {
+
+    it("should throw a TypeError if the argument passed is null", function() {
         var notACallback = null;
 
         try {
@@ -83,7 +81,7 @@ describe('Function', () => {
         }
     });
 
-    it("should throw a TypeError if the argument passed is an object", () => {
+    it("should throw a TypeError if the argument passed is an object", function() {
         var notACallback = {};
 
         try {
