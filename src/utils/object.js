@@ -9,7 +9,8 @@
 
 (function () {
     Object.isObject = function (obj) {
-        return obj instanceof Object;
+        if (typeof obj === "undefined" || obj === null ) return false
+        return obj.constructor === Object;
     }
 
     Object.validate = function (obj) {

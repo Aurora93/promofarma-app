@@ -6,11 +6,11 @@ describe("removeFromCart", function() {
     beforeEach(function(done) {
         context.cart.length = 0;
 
-        loadJSON(function(response) {
-            data = JSON.parse(response);
+        call("../../public/data/data.json", undefined, function(error, response) {
+            data = JSON.parse(response.content);
             randomProduct = data[Math.floor(Math.random() * data.length)];
 
-            context.cart.push(randomProduct);
+            context.cart.push(randomProduct.id);
 
             done();
         });

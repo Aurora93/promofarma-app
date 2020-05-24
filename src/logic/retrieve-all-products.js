@@ -11,8 +11,10 @@
 function retrieveAllProducts(callback) {
     Function.validate(callback);
     
-    loadJSON(function(response) {
-        var data = JSON.parse(response);
+    call("../../public/data/data.json", undefined, function(error, response) {
+        if (error) return callback(error);
+
+        var data = JSON.parse(response.content);
 
         return callback(data);
     })

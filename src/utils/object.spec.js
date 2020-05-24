@@ -2,10 +2,8 @@
 
 describe('Object.validate', function() {
     it("should succeed if the argument passed is an object constructor", function() {
-        function NewConstructor(name) { 
-            this.name = name;
-        };
-        var constructorTested = Object.validate(new NewConstructor("Promofarma"));
+        var object = {}
+        var constructorTested = Object.validate(object);
 
         expect(constructorTested).not.to.throw;
         expect(constructorTested).to.be.undefined;

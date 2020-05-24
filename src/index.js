@@ -1,60 +1,80 @@
 "use strict";
 
 function App() {
-    var app = document.createElement("main");
-    app.classList.add("main");
+    Component.call(this, document.createElement("main")); 
+    this.container.classList.add("main");
 
-    Component.call(this, app);
-
-    var productList = retrieveAllProducts(function(results) {
-        var products = new ProductList({ 
-            results: results,
+    var products;
+    var productList = retrieveAllProducts(function(items) {
+        products = new ProductList({ 
+            items: items,
             onAddToCart: function(productId) {
                 try {
                     addToCart(productId, function(error) {
-                        if (error) return; //TODO
+                        if (error && error.message === "product with id " + productId + " is already in the cart") return;
+                        else if (error && error.message !== "product with id " + productId + " is already in the cart" ) {
+                            var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                            return products.container.replaceWith(feedback.container);
+                        }
                         
                         retrieveProduct(productId, function(error, product) {
-                            if (error) console.error(error);
+                            if (error) {
+                                var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                                return products.container.replaceWith(feedback.container);
+                            }
 
-                            cart.addItem(product);
-                            
-                            cart.totalPrice(retrieveCartProducts());
+                            cart.addItem({ item: product });
+
                             products.disableAddToCart(productId);
                         });
                     });
                 } catch(error) {
-                    console.error(error);
+                    var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                    return products.container.replaceWith(feedback.container);
                 }
             }
         })
         
-        app.insertBefore(products.container, cart.container);
-    });
+        this.container.append(products.container);
 
-    var cart = new Cart({ 
-        results: retrieveCartProducts(),
-        onRemove: function(productId) {
-            try {
-                removeFromCart(productId, function(error) {
-                    if (error) return; //TODO
+        return products;
+    }.bind(this));
 
-                    retrieveProduct(productId, function(error, product) {
-                        if (error) return console.log(error);
+    var cart;
+    var cartList = retrieveCartProducts(function(items) {
+        cart = new CartList({ 
+            items: items,
+            onRemove: function(productId) {
+                try {
+                    removeFromCart(productId, function(error) {
+                        if (error) {
+                            var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                            return cart.container.replaceWith(feedback.container);
+                        }
 
-                        cart.removeItem(product);
+                        retrieveProduct(productId, function(error, product) {
+                            if (error) {
+                                var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                                return cart.container.replaceWith(feedback.container);
+                            }
 
-                        cart.totalPrice(retrieveCartProducts());
-                        productList.enableAddToCart(productId);
-                    });
-                })
-            } catch(error) {
-                console.error(error);
+                            cart.removeItem({ item: product });
+
+                            products.enableAddToCart(productId);
+                        });
+                    })
+                } catch(error) {
+                    var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                    return cart.container.replaceWith(feedback.container);
+                }
             }
-        }
-    });
+        });
+
+        this.container.append(cart.container);
+
+        return cart;
+    }.bind(this));
     
-    app.append(cart.container); 
 };
 
 App.extendsFrom(Component);

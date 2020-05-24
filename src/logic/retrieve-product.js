@@ -14,8 +14,10 @@ var retrieveProduct = function(productId, callback) {
     Number.validate(productId);
     Function.validate(callback);
 
-    loadJSON(function(response) {
-        var data = JSON.parse(response);
+    call("../../public/data/data.json",undefined, function(error, response) {
+        if (error) return callback(error);
+
+        var data = JSON.parse(response.content);
 
         var product = data.find(function(item) { return item.id === productId });
 
