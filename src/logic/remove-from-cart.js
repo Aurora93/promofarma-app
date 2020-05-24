@@ -1,5 +1,16 @@
 "use strict";
 
+/**
+ * Removes a product from the cart array
+ * 
+ * @param {string} productId product's unique id
+ * 
+ * @param {function} callback the callback return function
+ * 
+ * @returns {function} it returns nothing if it succeed or an Error if the product does not exist or the product is not in the cart
+ *
+ */
+
 var removeFromCart = function(productId, callback) {
     Number.validate(productId);
     Function.validate(callback);
