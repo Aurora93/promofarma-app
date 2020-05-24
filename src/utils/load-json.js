@@ -1,5 +1,13 @@
 "use strict"
 
+/**
+ * Loads the JSON file located on the data directory
+ *
+ * @param {function} callback the callback return function
+ *
+ * @returns {function} returns the database or returns a callback with a new Error if a network error ocurred
+ */
+
 function loadJSON(callback) { 
     Function.validate(callback);
     

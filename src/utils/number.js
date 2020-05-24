@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Validates if is an Number
+ * 
+ * @throws {TypeError} if is not an type of Number
+ * 
+ */
+
 (function () {
     Number.isNumber = function (num) {
         return typeof num === "number";

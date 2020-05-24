@@ -1,5 +1,12 @@
 "use strict";
 
+/**
+ * Validates if is an Object
+ * 
+ * @throws {TypeError} if is not an instance of Object
+ * 
+ */
+
 (function () {
     Object.isObject = function (obj) {
         return obj instanceof Object;
