@@ -1,3 +1,5 @@
+"use strict";
+
 function Cart(props) {
     var cart = document.createElement("section");
     Component.call(this, cart);
@@ -22,8 +24,11 @@ function Cart(props) {
     cartList.classList.add("cart__list");
 
     props.results.forEach(function(result){
-        var cartedProduct = new CartItem({ result: result });
-
+        var cartedProduct = new CartItem({ 
+            result: result,
+            onRemove: props.onRemove
+        });
+        
         cartList.append(cartedProduct.container);
     });
 
@@ -59,7 +64,11 @@ function Cart(props) {
 Cart.extendsFrom(Component);
 
 Cart.prototype.addItem = function(product) {
-    var newProductToCart = new CartItem({ result: product });
+    debugger
+    var newProductToCart = new CartItem({ 
+        result: product,
+        onRemove: console.log
+    });
     document.querySelector("ul.cart__list").append(newProductToCart.container);
 }
 

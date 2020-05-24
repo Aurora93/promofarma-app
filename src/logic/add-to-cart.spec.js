@@ -48,16 +48,32 @@ describe("addToCart", function() {
 
     it("should fail to add the product to the cart if the ID passed is not a number", function() {
         randomProductId = "some string";
-        expect(function() { addToCart(randomProductId) }).to.throw(TypeError, randomProductId + " is not a number");
+        expect(function() { addToCart(randomProductId, function() {}) }).to.throw(TypeError, randomProductId + " is not a number");
 
         randomProductId = undefined;
-        expect(function() { addToCart(randomProductId) }).to.throw(TypeError, randomProductId + " is not a number");
+        expect(function() { addToCart(randomProductId, function() {}) }).to.throw(TypeError, randomProductId + " is not a number");
 
         randomProductId = [];
-        expect(function() { addToCart(randomProductId) }).to.throw(TypeError, randomProductId + " is not a number");
+        expect(function() { addToCart(randomProductId, function() {}) }).to.throw(TypeError, randomProductId + " is not a number");
 
         randomProductId = {};
-        expect(function() { addToCart(randomProductId) }).to.throw(TypeError, randomProductId + " is not a number");
+        expect(function() { addToCart(randomProductId, function() {}) }).to.throw(TypeError, randomProductId + " is not a number");
+    });
+
+    it("should fail to add the product to the cart if the callback is not a function", function() {
+        randomProductId = Math.random();
+
+        var callback = "some string";
+        expect(function() { addToCart(randomProductId, callback) }).to.throw(TypeError, callback + " is not a function");
+
+        callback = undefined;
+        expect(function() { addToCart(randomProductId, callback) }).to.throw(TypeError, callback + " is not a function");
+
+        callback = [];
+        expect(function() { addToCart(randomProductId, callback) }).to.throw(TypeError, callback + " is not a function");
+
+        callback = {};
+        expect(function() { addToCart(randomProductId, callback) }).to.throw(TypeError, callback + " is not a function");
     });
 
     after(function() {

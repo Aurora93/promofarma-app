@@ -34,13 +34,8 @@ function CartItem(props) {
     cartDeleteButton.innerText = "Eliminar";
     cartDeleteButton.addEventListener("click", function(event) {
         event.preventDefault();
-
-        cartDeleteButton.innerText === "Eliminar" ? 
-        cartDeleteButton.innerText = "Eliminado!"
-        :
-        cartDeleteButton.innerText = "Eliminar";
-
-        //TODO do the actual delete
+        
+        props.onRemove(props.result.id);
     });
     cartPrice.append(cartDeleteButton);
 
