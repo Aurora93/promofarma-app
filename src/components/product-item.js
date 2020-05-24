@@ -1,20 +1,19 @@
 "use strict";
 
-function Product(props) {
-    var product = document.createElement("li");
-    product.classList.add("product");
-    product.setAttribute("id", props.result.id);
-    Component.call(this, product);
+function ProductItem(props) {
+    Component.call(this, document.createElement("li"));
+    this.container.classList.add("product");
+    this.container.dataset.productId = props.item.id;
     
     var productName = document.createElement("p");
     productName.classList.add("product__name");
-    productName.innerText = props.result.name;
-    product.append(productName);
+    productName.innerText = props.item.name;
+    this.container.append(productName);
 
     var productPrice = document.createElement("p");
     productPrice.classList.add("product__price");
-    productPrice.innerText = props.result.price + " €";
-    product.append(productPrice);
+    productPrice.innerText = props.item.price + " €";
+    this.container.append(productPrice);
 
     var addToCartButton = document.createElement("img");
     addToCartButton.classList.add("product__add-to-cart");
@@ -22,11 +21,10 @@ function Product(props) {
     addToCartButton.addEventListener("click", function(event) {
         event.preventDefault();
         
-        props.onAddToCart(props.result.id);
+        props.onAddToCart(props.item.id);
     });
-    product.append(addToCartButton);
 
-    return product.container;
+    this.container.append(addToCartButton);
 };
 
-Product.extendsFrom(Component);
+ProductItem.extendsFrom(Component);

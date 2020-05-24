@@ -16,16 +16,18 @@ var addToCart = function(productId, callback) {
     Number.validate(productId);
     Function.validate(callback);
     
-    loadJSON(function(response) {
-        var data = JSON.parse(response);
+    call("../../public/data/data.json", undefined, function(error, response) {
+        if (error) return callback(error);
+
+        var data = JSON.parse(response.content);
         
         var product = data.find(function(item) { return item.id === productId });
         if (!product) return callback(new Error("product with id " + productId + " does not exist"));
         
-        var productInCart = context.cart.find(function(item) { return item.id === productId });
+        var productInCart = context.cart.find(function(id) { return id === productId });
         if (productInCart) return callback(new Error("product with id " + productId + " is already in the cart"));
 
-        context.cart.push(product);
+        context.cart.push(productId);
         callback();
     })
 }.bind(context);

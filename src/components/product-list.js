@@ -1,9 +1,8 @@
 "use strict";
 
 function ProductList(props){
-    var productList = document.createElement("section");
-    Component.call(this, productList);
-    productList.classList.add("product-list");
+    Component.call(this, document.createElement("section"));
+    this.container.classList.add("product-list");
 
     var productListContainer = document.createElement("div");
     productListContainer.classList.add("product-list__container");
@@ -11,9 +10,9 @@ function ProductList(props){
     var productListUL = document.createElement("ul");
     productListUL.classList.add("product-list__list");
     
-    props.results.forEach(function(result) {
-        var product = new Product({ 
-            result: result,
+    props.items.forEach(function(item) {
+        var product = new ProductItem({ 
+            item: item,
             onAddToCart: props.onAddToCart 
         });
 
@@ -21,17 +20,18 @@ function ProductList(props){
     });
 
     productListContainer.append(productListUL);
-    productList.append(productListContainer);
+
+    this.container.append(productListContainer);
 };
 
 ProductList.extendsFrom(Component);
 
 ProductList.prototype.enableAddToCart = function(productId) {
-    document.getElementById(productId).querySelector(".product__add-to-cart--disabled").className = "product__add-to-cart";
-    document.getElementById(productId).querySelector(".product__price--disabled").className = "product__price";
+    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product__add-to-cart--disabled").className = "product__add-to-cart";
+    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product__price--disabled").className = "product__price";
 }
 
 ProductList.prototype.disableAddToCart = function(productId) {
-    document.getElementById(productId).querySelector(".product__add-to-cart").className = "product__add-to-cart--disabled";
-    document.getElementById(productId).querySelector(".product__price").className = "product__price--disabled";
+    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product__add-to-cart").className = "product__add-to-cart--disabled";
+    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product__price").className = "product__price--disabled";
 }

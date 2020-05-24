@@ -1,9 +1,12 @@
 "use strict";
 
-function Cart(props) {
-    var cart = document.createElement("section");
-    Component.call(this, cart);
-    cart.classList.add("cart");
+function CartList(props) {
+    Component.call(this, document.createElement("section"));
+    this.container.classList.add("cart");
+
+    this.quantity = 0;
+    this.total = 0;
+    this.onRemove = props.onRemove;
 
     var cartContainer = document.createElement("div");
     cartContainer.classList.add("cart__container");
@@ -23,10 +26,10 @@ function Cart(props) {
     var cartList = document.createElement("ul");
     cartList.classList.add("cart__list");
 
-    props.results.forEach(function(result){
+    props.items.forEach(function(item){
         var cartedProduct = new CartItem({ 
-            result: result,
-            onRemove: props.onRemove
+            item: item,
+            onRemove: this.onRemove
         });
         
         cartList.append(cartedProduct.container);
@@ -45,39 +48,47 @@ function Cart(props) {
 
     var cartAmount = document.createElement("p");
     cartAmount.classList.add("cart__amount");
-    cartAmount.innerText = "(" + props.results.length + (props.results.length === 1 ? " producto)" : " productos)");
+    cartAmount.innerText = "(" + this.quantity + (this.quantity === 1 ? " producto)" : " productos)");
     cartTotalQuantity.append(cartAmount);
 
     cartTotal.append(cartTotalQuantity);
 
     var cartTotalPrice = document.createElement("span");
     cartTotalPrice.classList.add("cart__total-price");
-    cartTotalPrice.innerText = props.results.totalPrice();
+    cartTotalPrice.innerText = parseFloat(this.total.toFixed(2)) + " €";
     cartTotal.append(cartTotalPrice);
 
     cartProductList.append(cartList);
     cartContainer.append(cartProductList);
     cartContainer.append(cartTotal);
-    cart.append(cartContainer);
+
+    this.container.append(cartContainer);
 };
 
-Cart.extendsFrom(Component);
+CartList.extendsFrom(Component);
 
-Cart.prototype.addItem = function(product) {
-    debugger
+CartList.prototype.addItem = function(props) {
     var newProductToCart = new CartItem({ 
-        result: product,
-        onRemove: console.log
+        item: props.item, 
+        onRemove: this.onRemove
     });
     document.querySelector("ul.cart__list").append(newProductToCart.container);
+
+    this.quantity++;
+    this.total += props.item.price;
+
+    document.querySelector(".cart__amount").innerText = "(" + this.quantity + (this.quantity === 1 ? " producto)" : " productos)");
+    document.querySelector(".cart__total-price").innerText = this.total.toFixed(2) + " €";
 }
 
-Cart.prototype.removeItem = function(product) {
-    var productToRemoveFromCart = document.getElementById(product.id);
-    document.querySelector("ul.cart__list").removeChild(productToRemoveFromCart);
-}
+CartList.prototype.removeItem = function(props) {
+    var productToRemoveFromCart = document.querySelector('[data-cart-id= "' + props.item.id + '"]');
+    
+    productToRemoveFromCart.remove();
 
-Cart.prototype.totalPrice = function(cartArray) {
-    document.querySelector(".cart__total-price").innerText = cartArray.totalPrice();
-    document.querySelector(".cart__amount").innerText = "(" + cartArray.length + (cartArray.length === 1 ? " producto)" : " productos)");
+    this.quantity === 0 ? this.quantity : this.quantity--;
+    this.total -= props.item.price;
+    
+    document.querySelector(".cart__amount").innerText = "(" + this.quantity + (this.quantity === 1 ? " producto)" : " productos)");
+    document.querySelector(".cart__total-price").innerText = parseFloat(this.total.toFixed(2)) + " €";
 }
