@@ -1,6 +1,6 @@
 @import ../config
 
-.product
+.product-item
     display: grid
     grid-template-columns: 2.95fr repeat(2, 1fr)
     column-gap: 0.5rem
@@ -19,9 +19,10 @@
             color: #cccccc
 
     &__add-to-cart
-        @extend %button-success
+        @extend %button
+        background-color: #97be0d
 
         &--disabled
-            @extend %button-success
+            @extend %button
             background-color: #cccccc
             cursor: default

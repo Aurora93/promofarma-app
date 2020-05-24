@@ -27,11 +27,11 @@ function ProductList(props){
 ProductList.extendsFrom(Component);
 
 ProductList.prototype.enableAddToCart = function(productId) {
-    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product__add-to-cart--disabled").className = "product__add-to-cart";
-    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product__price--disabled").className = "product__price";
+    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product-item__add-to-cart--disabled").className = "product-item__add-to-cart";
+    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product-item__price--disabled").className = "product-item__price";
 }
 
 ProductList.prototype.disableAddToCart = function(productId) {
-    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product__add-to-cart").className = "product__add-to-cart--disabled";
-    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product__price").className = "product__price--disabled";
+    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product-item__add-to-cart").className = "product-item__add-to-cart--disabled";
+    document.querySelector('[data-product-id="' + productId + '"]').querySelector(".product-item__price").className = "product-item__price--disabled";
 }

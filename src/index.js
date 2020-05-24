@@ -11,10 +11,17 @@ function App() {
             onAddToCart: function(productId) {
                 try {
                     addToCart(productId, function(error) {
-                        if (error) return; //TODO
+                        if (error && error.message === "product with id " + productId + " is already in the cart") return;
+                        else if (error && error.message !== "product with id " + productId + " is already in the cart" ) {
+                            var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                            return products.container.replaceWith(feedback.container);
+                        }
                         
                         retrieveProduct(productId, function(error, product) {
-                            if (error) console.error(error);
+                            if (error) {
+                                var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                                return products.container.replaceWith(feedback.container);
+                            }
 
                             cart.addItem({ item: product });
 
@@ -22,7 +29,8 @@ function App() {
                         });
                     });
                 } catch(error) {
-                    console.error(error);
+                    var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                    return products.container.replaceWith(feedback.container);
                 }
             }
         })
@@ -39,10 +47,16 @@ function App() {
             onRemove: function(productId) {
                 try {
                     removeFromCart(productId, function(error) {
-                        if (error) return; //TODO
+                        if (error) {
+                            var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                            return cart.container.replaceWith(feedback.container);
+                        }
 
                         retrieveProduct(productId, function(error, product) {
-                            if (error) return console.log(error);
+                            if (error) {
+                                var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                                return cart.container.replaceWith(feedback.container);
+                            }
 
                             cart.removeItem({ item: product });
 
@@ -50,7 +64,8 @@ function App() {
                         });
                     })
                 } catch(error) {
-                    console.error(error);
+                    var feedback = new Feedback({ message: "Uy! Algo salió mal, estamos trabajando en ello." });
+                    return cart.container.replaceWith(feedback.container);
                 }
             }
         });

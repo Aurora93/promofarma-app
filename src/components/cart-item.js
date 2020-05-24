@@ -33,7 +33,6 @@ function CartItem(props) {
     cartDeleteButton.innerText = "Eliminar";
     cartDeleteButton.addEventListener("click", function(event) {
         event.preventDefault();
-        debugger
         props.onRemove(props.item.id);
     });
     cartPrice.append(cartDeleteButton);
