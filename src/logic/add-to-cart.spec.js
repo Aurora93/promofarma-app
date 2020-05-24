@@ -4,8 +4,8 @@ describe("addToCart", function() {
     var data, randomProductId;
 
     before(function(done) {
-        loadJSON(function(response) {
-            data = JSON.parse(response);
+        call("../../public/data/data.json", undefined, function(error, response) {
+            data = JSON.parse(response.content);
 
             done();
         })
@@ -19,7 +19,7 @@ describe("addToCart", function() {
 
             expect(context.cart).to.exist;
             expect(context.cart).to.be.instanceof(Array);
-            expect(context.cart[0].id).to.equal(randomProductId);
+            expect(context.cart[0]).to.equal(randomProductId);
 
             done();
         })

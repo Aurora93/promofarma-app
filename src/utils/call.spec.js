@@ -1,6 +1,8 @@
 'use strict';
 
 describe('call', function () {
+    var url;
+
     it('should succeed on valid url', function (done) {
         var targets = [
             { url: 'https://www.lavanguardia.com/', text: 'vanguardia' },
@@ -10,34 +12,48 @@ describe('call', function () {
             { url: 'https://www.abc.es/', text: 'abc' }
         ];
 
-        var target = targets.random();
+        var target = targets[Math.floor(Math.random()*targets.length)];
 
-        call('https://skylabcoders.herokuapp.com/proxy?url=' + target.url, function(response) {
-            expect(response.status).toBe(200);
-
-            //expect(response.content.toLowerCase().includes(target.text)).toBeTruthy();
-            expect(response.content.toLowerCase()).toContain(target.text);
+        call("https://skylabcoders.herokuapp.com/proxy?url=" + target.url, undefined, function(error, response) {
+            expect(response.status).to.equal(200);
+            expect(response.content.toLowerCase()).to.contain(target.text);
 
             done();
         });
     });
 
-    it('should fail on invalid url', function() {
-        var url = 'invalid-url';
+    it("should fail when is an invalid url", function(done) {
+        var url = "https://www.kjxnlkdjsfnglksdjfng.com";
 
-        expect(function() {
+        call(url, undefined, function(error, response) {
+            expect(response).to.be.undefined;
+            expect(error).to.exist;
+            expect(error).to.be.instanceof(Error);
+            expect(error.message).to.equal("Network error");
+            
+            done();
+        });  
+    })
+
+    it("should fail on valid non-string url", function() {
+        url = 123;
+        expect(function(){
             call(url)
-        }).toThrowError(SyntaxError, url + ' is not an url');
-    });
+        }).to.throw(TypeError, url + " is not a string");
 
-    it('should fail on valid non-existing url', function(done) {
-        var url = 'https://non-existing.url';
-        
-        call(url, function(error) {
-            expect(error).toBeInstanceOf(Error);
-            expect(error.message).toBe('Network error');
+        url = {};
+        expect(function(){
+            call(url)
+        }).to.throw(TypeError, url + " is not a string");
 
-            done();
-        });
+        url = [];
+        expect(function(){
+            call(url)
+        }).to.throw(TypeError, url + " is not a string");
+
+        url = function(){};
+        expect(function(){
+            call(url)
+        }).to.throw(TypeError, url + " is not a string");
     });
 });

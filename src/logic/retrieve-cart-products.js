@@ -18,7 +18,6 @@ var retrieveCartProducts = function(callback) {
             return context.cart.indexOf(item.id) !== -1;
         });
 
-        debugger
         callback(itemsInCart);
     })
 }.bind(context);
