@@ -12,7 +12,7 @@ function App() {
             onAddToCart: function(productId) {
                 try {
                     addToCart(productId, function(error) {
-                        if (error) return;
+                        if (error) return; //TODO
                         
                         retrieveProduct(productId, function(error, product) {
                             if (error) console.error(error);
@@ -33,7 +33,25 @@ function App() {
     });
 
     var cart = new Cart({ 
-        results: retrieveCartProducts()
+        results: retrieveCartProducts(),
+        onRemove: function(productId) {
+            try {
+                removeFromCart(productId, function(error) {
+                    if (error) return; //TODO
+
+                    retrieveProduct(productId, function(error, product) {
+                        if (error) return console.log(error);
+
+                        cart.removeItem(product);
+
+                        cart.totalPrice(retrieveCartProducts());
+                        productList.enableAddToCart(productId);
+                    });
+                })
+            } catch(error) {
+                console.error(error);
+            }
+        }
     });
     
     app.append(cart.container); 
