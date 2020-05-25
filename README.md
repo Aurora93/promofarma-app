@@ -5,5 +5,19 @@ This small application shows a list of parapharmacy products, which the user can
 
 The application is made whole with ECMAScript 5 vanilla.
 
+# 💊 Functional description 💊
+- User can add a product to the cart
+- User can remove a product from the cart
+
+# 💊 Use-cases 💊
+![](./doc/use-cases.png)
+
+# 💊 Technical description 💊
+## Flow chart
+![](./doc/flow-chart.png)
+
+## Data model
+![](./doc/data-model.png)
+
 ## Trello link
 [Trello](https://trello.com/b/eLjfOwAW/promofarma)

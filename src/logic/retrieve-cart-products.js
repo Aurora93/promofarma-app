@@ -1,5 +1,4 @@
 "use strict";
- // get json and filter
 
 /**
  * Get all the products from the cart
